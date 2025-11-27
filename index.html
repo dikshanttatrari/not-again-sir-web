@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NotAgainSir | Student Panic Management</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-yellow: #F9C80E;  /* Frustrated Yellow */
+            --primary-blue: #344990;    /* Sarcastic Blue */
+            --light-blue: #86BBD8;      /* Tear Drop Blue */
+            --bg-color: #f6fbff;        /* Lightest Blue Background */
+            --text-dark: #222222;       /* Ink Black */
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* --- Navigation --- */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 5%;
+            background: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 1.5rem;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .logo span {
+            color: var(--primary-blue);
+        }
+
+        .logo .highlight {
+            color: var(--primary-yellow);
+            -webkit-text-stroke: 1px var(--text-dark); /* Subtle outline to make yellow pop */
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-blue);
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            padding: 4rem 5%;
+            min-height: 90vh;
+            background-image: radial-gradient(circle at 10% 20%, rgba(134, 187, 216, 0.1) 0%, transparent 20%),
+                              radial-gradient(circle at 90% 80%, rgba(249, 200, 14, 0.1) 0%, transparent 20%);
+        }
+
+        .hero-text {
+            flex: 1;
+            min-width: 300px;
+            padding-right: 2rem;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            color: var(--text-dark);
+        }
+
+        .hero-text h1 span {
+            color: var(--primary-blue);
+            position: relative;
+        }
+
+        .hero-text h1 span::after {
+            content: '';
+            position: absolute;
+            bottom: 5px;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background-color: var(--primary-yellow);
+            z-index: -1;
+            transform: skewX(-15deg);
+            opacity: 0.6;
+        }
+
+        .hero-text p {
+            font-size: 1.2rem;
+            color: #555;
+            margin-bottom: 2rem;
+            max-width: 500px;
+        }
+
+        /* --- Login Card --- */
+        .login-container {
+            flex: 0 0 400px;
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(52, 73, 144, 0.15);
+            border: 2px solid #eef6ff;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Decorative "Tape" on the card */
+        .login-container::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 30px;
+            background-color: rgba(249, 200, 14, 0.8);
+            transform: translateX(-50%) rotate(-2deg);
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .login-header h2 {
+            color: var(--primary-blue);
+            font-size: 1.8rem;
+        }
+
+        .login-header p {
+            font-size: 0.9rem;
+            color: #888;
+        }
+
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--text-dark);
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #eee;
+            border-radius: 10px;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 3px rgba(52, 73, 144, 0.1);
+        }
+
+        .btn-primary {
+            width: 100%;
+            padding: 14px;
+            background-color: var(--primary-yellow);
+            color: var(--text-dark);
+            border: none;
+            border-radius: 10px;
+            font-weight: 800;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 0 #dcb000; /* 3D effect */
+        }
+
+        .btn-primary:active {
+            transform: translateY(4px);
+            box-shadow: 0 0 0 #dcb000;
+        }
+
+        .btn-primary:hover {
+            filter: brightness(1.05);
+        }
+
+        .form-footer {
+            margin-top: 1.5rem;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        .form-footer a {
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        /* --- Features Section --- */
+        .features {
+            padding: 4rem 5%;
+            background: var(--white);
+            text-align: center;
+        }
+
+        .section-title {
+            margin-bottom: 3rem;
+            font-size: 2rem;
+            color: var(--primary-blue);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            padding: 2rem;
+            background: #f9fcff;
+            border-radius: 15px;
+            border: 1px solid #eef6ff;
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-yellow);
+        }
+
+        .emoji-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .feature-card h3 {
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .feature-card p {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* --- Footer --- */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: var(--primary-blue);
+            color: var(--white);
+            font-size: 0.9rem;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                gap: 3rem;
+                padding-top: 2rem;
+            }
+
+            .hero-text {
+                padding-right: 0;
+            }
+
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+
+            .login-container {
+                width: 100%;
+                flex: none;
+            }
+
+            .nav-links {
+                display: none; /* Hidden on mobile for simplicity */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">
+            Not<span class="highlight">Again</span><span>Sir!</span>
+        </div>
+        <div class="nav-links">
+            <a href="#">Why?</a>
+            <a href="#">Features</a>
+            <a href="#">Contact</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-text">
+            <h1>We feel your <br><span>Academic Pain.</span></h1>
+            <p>The only app that warns you about surprise exams and syllabus changes <i>before</i> the panic attack sets in.</p>
+            <div style="display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; @media(min-width: 768px){justify-content: flex-start;}">
+               <span style="font-size: 0.9rem; background: #eef6ff; padding: 5px 10px; border-radius: 5px; color: var(--primary-blue);">#NoMoreSurprises</span>
+               <span style="font-size: 0.9rem; background: #fffbe6; padding: 5px 10px; border-radius: 5px; color: #b89300;">#SaveMyGPA</span>
+            </div>
+        </div>
+
+        <div class="login-container">
+            <div class="login-header">
+                <h2>Welcome Back</h2>
+                <p>Ready for today's bad news? 🙃</p>
+            </div>
+            <form>
+                <div class="form-group">
+                    <label for="email">Student Email</label>
+                    <input type="email" id="email" placeholder="name@college.edu">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="••••••••">
+                </div>
+                <button type="submit" class="btn-primary">Get Me In</button>
+            </form>
+            <div class="form-footer">
+                <p>Forgot password? <a href="#">Too bad.</a> (Just kidding, click here)</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <h2 class="section-title">Why do you need this?</h2>
+        <div class="grid">
+            <div class="feature-card">
+                <span class="emoji-icon">😰</span>
+                <h3>Instant Panic Alerts</h3>
+                <p>Get notified the second a professor thinks about a surprise test. We track their mood swings.</p>
+            </div>
+            <div class="feature-card">
+                <span class="emoji-icon">📅</span>
+                <h3>Timetable Shuffle</h3>
+                <p>Did the 9 AM class move to 4 PM? We'll tell you before you wake up early for no reason.</p>
+            </div>
+            <div class="feature-card">
+                <span class="emoji-icon">📚</span>
+                <h3>Syllabus Tracker</h3>
+                <p>Track exactly how much you haven't studied yet. Visualize your procrastination.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 NotAgainSir. Made with ☕ and anxiety.</p>
+    </footer>
+
+</body>
+</html>
